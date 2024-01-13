@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <revision>0.0.1-SNAPSHOT</revision>
+        <java.version>11</java.version>
+        <lombok.version>1.18.22</lombok.version>
+        <protobuf-java.version>3.19.1</protobuf-java.version>
+        <protobuf-java-format.version>1.2</protobuf-java-format.version>
+        <protobuf-java-util.version>3.5.1</protobuf-java-util.version>
+        <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
+        <netty-version>5.0.0.Alpha2</netty-version>
+        <spring-boot-starter.version>2.7.5</spring-boot-starter.version>
+        <commons-lang3.version>3.13.0</commons-lang3.version>
+        <lombok.version>1.18.22</lombok.version>
+        <sleuth.version>3.1.1</sleuth.version>
+        <junit.version>4.13.1</junit.version>
+
+    </properties>
+
+
+    <groupId>com.taoyiyi</groupId>
+    <artifactId>chat-backend</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>chat-backend</name>
+    <description>chat-backend project</description>
+    <modules>
+        <module>chat-api</module>
+        <module>chat-proto</module>
+    </modules>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

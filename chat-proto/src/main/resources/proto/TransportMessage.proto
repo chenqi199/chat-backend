@@ -1,0 +1,120 @@
+syntax = "proto3";
+import "google/protobuf/any.proto";
+package com.taoyiyi.chat.proto; //命名空间约定
+
+//根传输消息
+message TransportMessage {
+  int64 Id = 1; //消息Id(发送方内保持自增),请求中传入，响应中传回相同值
+  string AccessToken = 2; //设备通信token
+  EnumMsgType MsgType = 3; //承载的具体消息类型
+  google.protobuf.Any Content = 4; //具体的消息数据
+  int64 RefMessageId = 5; //如果是针对某个消息的响应，这里写对应请求的id
+}
+
+//消息类型枚举，一般每一个消息类型都应该对应一个特定的message结构
+//20xx形式的消息类型需要 手机客户端开发者留意
+//30xx形式的消息类型需要 PC客户端开发者留意
+//10xx形式的消息类型需要 手机客户端、PC客户端开发者留意
+enum EnumMsgType {
+
+  UnknownMsg = 0; //未知消息
+
+  HeartBeatReq = 1001; //客户端发送的心跳包
+  MsgReceivedAck = 1002; //消息接收确认回复（接收或拒绝接收）
+  Error = 1003; // 将错误单独提升为一种消息类型 4.1
+
+  // 设备客户端授权类消息
+  DeviceAuthReq = 1010; //设备(手机客户端、客服客户端)获取通信token请求 4.2
+  DeviceAuthRsp = 1011; //设备(手机客户端、客服客户端)获取通信token响应 4.3
+  DeviceExitNotice = 1012; //设备授权后退出(仅用于服务端内部)
+  AccountForceOfflineNotice = 1013; //账号强制下线通知 4.18
+  RedirectNotice = 1015;
+  TriggerDeviceInfo = 1016;
+  TalkToOther= 1070; // 发送消息
+  // 手机客户端上传的通知类消息
+  TriggerChatPushTask = 1019; //触发上线通知，用于更新账号的信息
+  OnlineNotice = 1020; //手机客户端上线通知 4.4
+  OfflineNotice = 1021; //手机客户端下线通知 4.5
+
+  PostLogReq = 3202; // 客户端上传日志 4.202
+
+}
+
+// 全局错误码表
+enum EnumErrorCode {
+  Success = 0; //无错误
+  NoRight = 1001; //无权限
+  InvalidParam = 1002; //数据信息不合法
+  InternalError = 1003; //内部处理错误
+  TargetNotOnline = 1004; //发送消息或指令时对方不在线
+}
+
+// 性别枚举
+enum EnumGender {
+  UnknownGender = 0; //未知
+  Male = 1; //男
+  Female = 2; //女
+}
+
+// 聊天内容类型
+enum EnumContentType {
+  UnknownContent = 0; // 未知内容
+  Text = 1; // 文本内容
+  Picture = 2; // 图片消息
+  Voice = 3; // 语音消息
+  Video = 4; // 视频消息
+  System = 5; //系统消息
+  Link = 6; // 链接消息
+  LinkExt = 7; // 扩展的链接消息
+  File = 8; // 文件发送
+  NameCard = 9; // 名片
+  Location = 10; // 位置信息
+  Emoji = 14; // 表情
+  AudioCall = 19; // 语音通话
+  VideoCall = 20; // 视频通话
+  NotifyMsg = 21; // 服务通知
+  QuoteMsg = 22; // 引用通知
+  ChatRecord = 31; // 聊天记录
+  UnSupport = 99; // 不支持的消息
+}
+
+// 设备 ~ 号 在线状态枚举
+enum EnumOnlineState {
+  UnknownState = 0; // 未知，在条件中可认为是全部
+  Online = 1; // 在线
+  Offline = 2; // 离线
+}
+
+// 任务类型
+enum EnumTaskType {
+  UnknownTask = 0; // 未知，不应该出现，但是协议需要
+
+}
+
+
+
+// 消息发送状态
+enum EnumSendStatus {
+  NoAction = 0x00; // 无状态
+  Sending = 0x01; // 发送中
+  SendSuccess = 0x11; // 发送成功
+  SendError = 0x10; // 发送失败
+}
+
+// 被强制下线的原因
+enum EnumForceOfflineReason {
+  NoReason = 0; // 就是要下线你 
+  FuckedByOtherAuthorizer = 1; // 别处登录挤下线了 
+  ByReAlloc = 2; // 被重新分配
+  ByDeviceOffline = 3; // 设备下线而下线
+  ByOffline = 4; // 主动下线
+}
+
+enum EnumUserRole {
+  merchant =0;// 商家
+  tech = 1; // 技师
+  cus = 2; // 用户
+  sys = 3; // 系统
+
+}
+

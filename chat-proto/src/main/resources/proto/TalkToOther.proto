@@ -1,0 +1,13 @@
+syntax = "proto3";
+package com.taoyiyi.chat.proto; //命名空间约定
+import "TransportMessage.proto";
+
+message TalkToOtherMessage {
+  string formUser = 1; // 发送人
+  string toUser = 2; //接收人
+  EnumContentType contentType = 3; // 发送消息类型 Text Picture Voice Video Link File NameCard WeApp Quote Emoji ShiPinHao
+  bytes content = 4; // 发送消息内容 文本; 图片，视频，语音，文件url; 链接json; 名片wxid; Emoji的md5或Emoji的详细json
+  string remark = 8; // 其他备注信息，群聊@别人；Quote（引用消息）：引用消息的msgSvrId字符串
+
+  int64 msgId = 9; // 发送给手机端的时候需要赋值，用于TalkToFriendTaskResultNotice中
+}

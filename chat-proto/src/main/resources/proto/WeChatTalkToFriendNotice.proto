@@ -1,0 +1,26 @@
+syntax = "proto3";
+package com.taoyiyi.chat.proto; //命名空间约定
+import "TransportMessage.proto";
+
+message WeChatTalkToFriendNoticeMessage {
+    string ChatId = 1; // 登录的人的号
+    string FriendId = 3; // 对方的号
+    EnumContentType ContentType = 5; // 发送的消息内容类型
+    bytes Content = 6; // 内容 二进制流
+    int64 MsgId = 7; //全局消息Id （手机端发送时无需赋值该参数）
+    int64 msgSvrId = 8; // 消息唯一id
+    int64 CreateTime = 9; // 消息时间
+    string userInfo = 10; // 好友内部全局唯一识别码
+    string Ext = 11; // 扩展信息，图片视频{"length":10000, "hdlen":20000, "duration":30} 文件大小，原图大小，视频时长
+    string FriendNick = 12; // 联系人昵称
+    string FriendAvatar = 13; // 联系人头像
+    string CorpName = 14; // xxx公司
+    string SendBy = 15; // 消息发送端 1-客服系统；2-其他端
+    string FfAccount = 16; // 发送人账号
+    string FfNick = 17; // 发送人昵称
+    string talker = 18; // 群成员wxid
+    string ChatRoomNick = 19; // 群昵称
+    string ChatRoomAvatar = 20; // 群头像
+    string CustomFriendId = 21; // 自定义好友ID
+    bool DisturbEnable = 22; // 消息免扰
+}

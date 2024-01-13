@@ -1,0 +1,47 @@
+server:
+
+  port: -1
+
+
+
+
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    defaultPropertyInclusion: NON_EMPTY
+    deserialization:
+      fail-on-unknown-properties: false
+    serialization:
+      fail-on-empty-beans: false
+    parser:
+      allow-unquoted-control-chars: true
+
+
+
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: /Appspace/taoyiyi/chat/logs
+  level:
+    root: INFO
+    org:
+      springframework:
+        security: DEBUG
+
+async:
+  executor:
+    thread-name-prefix: taoyiyi_chat_ASYNC_
+    core-pool-size: 50
+    max-pool-size: 50
+    queue-capacity: 1000
+    keep-alive-seconds: 300
+  special:
+    pool-size: 10
+    queue-capacity: 100
+
+scheduler:
+  scheduler:
+    thread-name-prefix: taoyiyi_chat_JOB_
+    pool-size: 100
