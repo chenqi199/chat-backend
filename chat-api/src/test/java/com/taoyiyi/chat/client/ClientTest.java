@@ -18,7 +18,6 @@ public class ClientTest {
     @Test
     public void user1Chat() {
         ChatClient.get().setUserCode(TestLocalMsgConstant.fromUser).checkConnect();
-
         sendMsg(TestLocalMsgConstant.fromUser,TestLocalMsgConstant.toUser);
     }
 
